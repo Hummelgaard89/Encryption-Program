@@ -16,6 +16,7 @@ namespace Encryption_Program
         public int KeySize;
         public int BlockSize;
         public CipherMode Mode;
+        //Sets the type of encryption to be used.
         public void SetEncryptionTypeAndMode(string encryptionType, string encryptionMode)
         {
             switch (encryptionType)
