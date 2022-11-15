@@ -1,0 +1,125 @@
+﻿<Window x:Class="Encryption_Program.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Encryption_Program"
+        mc:Ignorable="d"
+        
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <!--Destinations-->
+        <Border Grid.Row="0" Grid.ColumnSpan="2"  Background="black"/>
+        <Image Source="/images/Logo.png"></Image>
+        <StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="left" >
+            <ComboBox Margin="15" VerticalAlignment="Center" Name="cbEncryptionType">
+                <ComboBoxItem>AES-128</ComboBoxItem>
+                <ComboBoxItem>AES-192</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">AES-256</ComboBoxItem>
+                <ComboBoxItem>3DES-128</ComboBoxItem>
+                <ComboBoxItem>3DES-192</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Margin="15" VerticalAlignment="Center" Name="cbEncryptionMode">
+                <ComboBoxItem IsSelected="True">CBC</ComboBoxItem>
+                <ComboBoxItem>ECB</ComboBoxItem>
+            </ComboBox>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Name="txtTimeElapsed" Foreground="White"></TextBlock>
+        </StackPanel>
+        <!--Main Content-->
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#202020"/>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0"
+                    Grid.RowSpan="6"
+                    Grid.ColumnSpan="3"
+                    Margin=" 5"
+                    Background="#8899A6" 
+                    BorderBrush="black"
+                    BorderThickness="2"
+                    Padding="5"
+                    CornerRadius="20">
+            </Border>
+            <Border Grid.Column="0" Grid.RowSpan="2" CornerRadius="20" Background="blue" Margin="15">
+                <Button BorderThickness="0" Background="blue" Margin="15" FontSize="25" Click="btnGenerateKey">Generate Keys</Button>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="2" Grid.RowSpan="2" CornerRadius="20" Background="blue" Margin="15">
+                <Button BorderThickness="0" Background="blue" Margin="15" FontSize="25" Click="btnEncryptdata">Encrypt Data</Button>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="4" Grid.RowSpan="2" CornerRadius="20" Background="blue" Margin="15">
+                <Button BorderThickness="0" Background="blue" Margin="15" FontSize="25" Click="btnDecryptData">Decrypt Data</Button>
+            </Border>
+            <!--Standard Texts-->
+            <TextBlock  Grid.Column="1" Grid.Row="0" HorizontalAlignment="center" VerticalAlignment="Center" FontSize="18" Name="TextboxKey">KEY:</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="1" HorizontalAlignment="center" VerticalAlignment="Center" FontSize="18" Name="TextboxIV">IV:</TextBlock>
+
+            <DockPanel Grid.Column="2" Grid.Row="0" Margin="10">
+                <WrapPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,10">
+
+                </WrapPanel>
+                <TextBox Margin="15,0,15,0" Name="txtEncryptionKey" />
+            </DockPanel>
+
+            <DockPanel Grid.Column="2" Grid.Row="1" Margin="10">
+                <WrapPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,10">
+
+                </WrapPanel>
+                <TextBox Margin="15,0,15,0" Name="txtEncryptionIV" />
+            </DockPanel>
+
+            <Button Grid.Column="1" Grid.Row="2" Margin="10" Name="btnEncryptInput" Click="EncryptInputClick" >Select Input</Button>
+            <DockPanel Grid.Column="2" Grid.Row="2" Margin="10">
+                <WrapPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,10">
+                    
+                </WrapPanel>
+                <TextBox Margin="15,0,15,0" Name="txtEncryptInput" />
+            </DockPanel>
+
+            <Button Grid.Column="1" Grid.Row="3" Margin="10" Name="btnEncryptOutput" Click="EncryptOutputClick" >Select Output</Button>
+            <DockPanel Grid.Column="2" Grid.Row="3" Margin="10">
+                <WrapPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,10">
+                    
+                </WrapPanel>
+                <TextBox Margin="15,0,15,0" Name="txtEncryptOutput" />
+            </DockPanel>
+
+            <Button Grid.Column="1" Grid.Row="4" Margin="10" Name="btnDecryptInput" Click="DecryptInputClick" >Select Input</Button>
+            <DockPanel Grid.Column="2" Grid.Row="4" Margin="10">
+                <WrapPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,10">
+                    
+                </WrapPanel>
+                <TextBox Margin="15,0,15,0" Name="txtDecryptInput" />
+            </DockPanel>
+
+            <Button Grid.Column="1" Grid.Row="5" Margin="10" Name="btnDecryptOutput" Click="DecryptOutputClick" >Select Output</Button>
+            <DockPanel Grid.Column="2" Grid.Row="5" Margin="10">
+                <WrapPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,10">
+                    
+                </WrapPanel>
+                <TextBox Margin="15,0,15,0" Name="txtDecrptOutput" />
+            </DockPanel>
+
+            
+            
+        </Grid>
+    </Grid>
+</Window>
